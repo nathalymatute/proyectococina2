@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pedidos Actuales</title>
+    <style>
+        /* Estilos para las filas */
+        tr {
+            background-color: #cce5ff; /* Celeste para todas las filas */
+        }
+
+        /* Estilos para las columnas */
+        th, td {
+            border: 1px solid black; /* Borde para todas las celdas */
+            padding: 8px; /* Espaciado interno de las celdas */
+            background-color: #f2f2f2; /* Color de fondo para las celdas */
+        }
+
+        th {
+            background-color: #99c2ff; /* Azul para las celdas de encabezado */
+        }
+    </style>
+</head>
+<body>
+
+    <Center><h1>PEDIDOS ACTUALES</h1></Center>
+
+    <table>
+        <tr>
+            <th>Numero de Mesa</th>
+            <th>Nombre Platillo</th>
+            <th>Fecha</th>
+            <th>Tipo de Orden</th>
+            <th>Nombre del Cliente</th>
+            <th>Cantidad</th>
+            <th>Comentarios</th>
+            <th>Estado</th>
+            <th>Total</th>
+            <th>Acciones</th>
+        </tr>
+
+        @foreach (var pedido in (IEnumerable<dynamic>)ViewData["Pedidos"])
+        {
+            <tr>
+                <td>@pedido.Numero_mesa</td>
+                <td>@pedido.Nombre_platillo</td>
+                <td>@pedido.fecha</td>
+                <td>@pedido.Tipo_de_orden</td>
+                <td>@pedido.nombre_del_cliente</td>
+                <td>@pedido.cantidad</td>
+                <td>@pedido.comentarios</td>
+                <td>@pedido.estado</td>
+                <td>@pedido.Total</td>
+                <td>
+                    <form asp-action="ActualizarEstado" asp-controller="modulocomida">
+                        <input type="hidden" name="pedidoId" value="@pedido.Id_pedido" />
+                        <button type="submit">Actualizar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
+
